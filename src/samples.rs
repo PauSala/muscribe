@@ -2,8 +2,6 @@ use hound;
 
 use std::ops::Deref;
 
-use crate::charts::plot;
-
 #[derive(Clone)]
 pub struct SampleSpec {
     pub sample_rate: u32,
@@ -33,7 +31,8 @@ impl Deref for Samples {
 }
 
 pub fn file_to_samples() -> Samples {
-    let path = "test.wav";
+    // TODO: pass a path to this function
+    let path = "audio/test.wav";
 
     // Open the WAV file
     let mut reader = hound::WavReader::open(path).expect("Failed to open WAV file");
@@ -45,8 +44,8 @@ pub fn file_to_samples() -> Samples {
         .map(|s| s.expect("Failed to read sample"))
         .collect();
 
-    let clnd: Vec<f32> = samples.clone().iter().map(|f| *f as f32).collect();
-    plot(&clnd, "Samples.png").unwrap();
+    // let clnd: Vec<f32> = samples.clone().iter().map(|f| *f as f32).collect();
+    // plot(&clnd, "Samples.png").unwrap();
 
     println!("Loaded {} samples", samples.len());
 
