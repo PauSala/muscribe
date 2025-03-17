@@ -1,0 +1,21 @@
+[package]
+name = "pitch-detector"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cqt-rs = { path = "../cqt-rs" }
+hound = "3.5.1"
+ndarray = "0.16.1"
+pitch-detection = "0.3.0"
+plotters = "0.3.7"
+rubato = "0.16.1"
+rustfft = "6.2.0"
+
+[[bin]]
+name = "transcriber"
+path = "src/main.rs"
+
+[lib]
+name = "transcriber"
+path = "src/lib.rs"
