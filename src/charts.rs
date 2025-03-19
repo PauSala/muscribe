@@ -65,7 +65,7 @@ pub fn print_chart(data: &[f32]) -> Result<(), Box<dyn std::error::Error>> {
 }
 
 pub fn print_frequencies(data: &[(f32, bool)]) -> Result<(), Box<dyn std::error::Error>> {
-    let root = BitMapBackend::new("frequencies.png", (1200, 800)).into_drawing_area();
+    let root = BitMapBackend::new("charts/frequencies.png", (1200, 800)).into_drawing_area();
     root.fill(&WHITE)?;
 
     let max_index = data.len() as f32;

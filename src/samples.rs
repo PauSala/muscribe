@@ -1,6 +1,6 @@
 use hound;
 
-use std::ops::Deref;
+use std::{ops::Deref, path::Path};
 
 #[derive(Clone)]
 pub struct SampleSpec {
@@ -30,9 +30,8 @@ impl Deref for Samples {
     }
 }
 
-pub fn file_to_samples() -> Samples {
+pub fn file_to_samples(path: &Path) -> Samples {
     // TODO: pass a path to this function
-    let path = "audio/test.wav";
 
     // Open the WAV file
     let mut reader = hound::WavReader::open(path).expect("Failed to open WAV file");
