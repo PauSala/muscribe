@@ -15,8 +15,34 @@ impl<'a> StftBasedOnset<'a> {
         }
     }
 
+    /// Spectral flux
+    pub fn spectral_flux(&self) -> Vec<f32> {
+        let stft = self.stft();
+        let num_frames = stft.len();
+        let num_bins = stft[0].len();
+        let mut sf = Vec::with_capacity(num_frames);
+
+        for n in 1..num_frames {
+            let mut sum = 0.0;
+
+            for k in 0..num_bins {
+                // Magnitude difference
+                let mag_diff = stft[n][k].norm() - stft[n - 1][k].norm();
+
+                // Half-wave rectification
+                if mag_diff > 0.0 {
+                    sum += mag_diff;
+                }
+            }
+
+            sf.push(sum);
+        }
+
+        sf
+    }
+
     /// Complex domain
-    pub fn cd(&self) -> Vec<f32> {
+    pub fn complex_domain(&self) -> Vec<f32> {
         self.cd_inner(false)
     }
 
@@ -39,9 +65,9 @@ impl<'a> StftBasedOnset<'a> {
         for n in 2..num_frames {
             let mut sum = 0.0;
             for k in 0..num_bins {
-                let x_n = stft[n][k]; // X(n, k)
-                let x_n1 = stft[n - 1][k]; // X(n-1, k)
-                let x_n2 = stft[n - 2][k]; // X(n-2, k)
+                let x_n = stft[n][k];
+                let x_n1 = stft[n - 1][k];
+                let x_n2 = stft[n - 2][k];
 
                 // Amplitude and phase of X(n-1, k)
                 let amp_n1 = x_n1.norm();

@@ -1,5 +1,8 @@
 use transcriber::{
-    algorithms::{onset_detection::StftBasedOnset, peak_picking::standardize},
+    algorithms::{
+        onset_detection::StftBasedOnset,
+        peak_picking::{peak_picking, standardize},
+    },
     charts::plot,
     samples::file_to_samples,
 };
@@ -11,10 +14,11 @@ fn main() {
     let samples = file_to_samples();
 
     let onset = StftBasedOnset::new(&samples, 2048, 441);
-    let mut cd = onset.rcd();
+    let mut cd = onset.spectral_flux();
     standardize(&mut cd);
 
     plot(&cd, "complex_domain").unwrap();
+    plot(&peak_picking(&cd, 2, 3, 0.8, 0.8), "onsets").unwrap();
 
     // let notes = Yin::from(samples.clone());
     // println!("Yan samples {:?}", notes.len());
