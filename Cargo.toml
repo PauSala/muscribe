@@ -5,9 +5,15 @@ edition = "2024"
 
 [dependencies]
 hound = "3.5.1"
+ndarray = "0.16.1"
 pitch-detection = "0.3.0"
 plotters = "0.3.7"
+pyin = "1.2.0"
 rustfft = "6.2.0"
+
+[[example]]
+name = "pyin"
+path = "examples/pyin.rs"
 
 [[bin]]
 name = "transcriber"

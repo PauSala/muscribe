@@ -7,10 +7,10 @@ pub struct Yin(Vec<Option<Note>>);
 
 impl From<Samples> for Yin {
     fn from(samples: Samples) -> Self {
-        const SAMPLE_RATE: usize = 22050;
-        const SIZE: usize = 1024;
+        const SAMPLE_RATE: usize = 44100;
+        const SIZE: usize = 1024 * 5;
         const PADDING: usize = SIZE / 2;
-        const POWER_THRESHOLD: f64 = 10.0;
+        const POWER_THRESHOLD: f64 = 1.0;
         const CLARITY_THRESHOLD: f64 = 0.8;
 
         let signal: Vec<f64> = samples.iter().map(|s| *s as f64).collect();

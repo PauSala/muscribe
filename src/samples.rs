@@ -38,10 +38,17 @@ pub fn file_to_samples(path: &Path) -> Samples {
     println!("Sample spec: {:?}", reader.spec());
 
     // Collect samples into a vector
-    let samples: Vec<i16> = reader
-        .samples::<i16>()
+    let mut samples: Vec<f32> = reader
+        .samples::<f32>()
         .map(|s| s.expect("Failed to read sample"))
         .collect();
+
+    // let mut samples: Vec<i16> = reader
+    //     .samples::<i16>()
+    //     .map(|s| s.expect("Failed to read sample"))
+    //     .collect();
+
+    samples = samples.into_iter().step_by(2).collect();
 
     // let clnd: Vec<f32> = samples.clone().iter().map(|f| *f as f32).collect();
     // plot(&clnd, "Samples.png").unwrap();
