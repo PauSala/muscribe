@@ -2,9 +2,7 @@ use std::{ops::Deref, path::Path};
 
 use pyin::{Framing, PYINExecutor, PadMode};
 use transcriber::{
-    algorithms::shared::frame_to_seconds,
-    charts::{plot, print_frequencies},
-    notes::Note,
+    algorithms::shared::frame_to_seconds, charts::print_frequencies, notes::Note,
     samples::file_to_samples,
 };
 

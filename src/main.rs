@@ -62,7 +62,7 @@ fn main() {
     let fill_unvoiced = f64::NAN;
     let framing = Framing::Center(PadMode::Constant(0.)); // Zero-padding is applied on both sides of the signal. (only if cetner is true)
 
-    let (timestamp, f0, voiced_flag, voiced_prob) = pyin_exec.pyin(&wav, fill_unvoiced, framing);
+    let (_timestamp, f0, _voiced_flag, voiced_prob) = pyin_exec.pyin(&wav, fill_unvoiced, framing);
     let notes = &f0
         .iter()
         .enumerate()
