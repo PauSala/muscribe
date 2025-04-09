@@ -22,6 +22,8 @@ pub fn main() {
         resolution,
     );
 
+    println!("PYIN Executor initialized.");
+
     let samples = file_to_samples(&Path::new("audio/test4.wav"));
 
     let wav: Vec<f64> = file_to_samples(&Path::new("audio/test4.wav"))
